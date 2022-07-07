@@ -11,7 +11,7 @@ class AbstractStrictData {
 
     foreach ($props as $propName => $propValue) {
       if (gettype($propValue) === 'NULL') {
-        throw new \InvalidArgumentException ('Property "'.$propName.'" can not be NULL in class "'.self::class.'" constructor. It might be initialized with some value.');
+        throw new \InvalidArgumentException ('Property "'.$propName.'" can not be NULL in class "'.get_class($this).'" constructor. It might be initialized with some value.');
       } 
     }
   }
@@ -21,13 +21,13 @@ class AbstractStrictData {
     if (property_exists($this, $property)) {
       return $this->$property;
     }
-    throw new \InvalidArgumentException('Class "'.self::class.'" does not have "'.$property.'" property');
+    throw new \InvalidArgumentException('Class "'.get_class($this).'" does not have "'.$property.'" property');
   }
   
   public function __set($property, $value)
   {
     if (!property_exists($this, $property)) {
-      throw new \InvalidArgumentException('Class "'.self::class.'" does not have "'.$property.'" property');
+      throw new \InvalidArgumentException('Class "'.get_class($this).'" does not have "'.$property.'" property');
     }
 
     if (gettype($value) !== gettype($this->$property)) {
@@ -47,4 +47,8 @@ class AbstractStrictData {
     }
     return $array;
   }
+
+	public function toJson(int $jsonConstant = 0) {
+		return json_encode($this->toArray(), $jsonConstant);
+	}
 }
