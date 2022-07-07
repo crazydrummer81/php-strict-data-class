@@ -10,11 +10,17 @@ $response = new StrictResponse;
 
 var_dump($response);
 // object(StrictResponse)#1 (2) {
-//   ["message":protected]=>     
-//   string(6) "Hello!"
-//   ["statusCode":protected]=>  
-//   int(200)
-// }
+  //   ["message":protected]=>     
+  //   string(6) "Hello!"
+  //   ["statusCode":protected]=>  
+  //   int(200)
+  // }
+  
+var_dump($response->message);
+// string(6) "Hello!"
+
+var_dump($response->notDeclaredProperty);
+// PHP Fatal error:  Uncaught InvalidArgumentException: Class "StrictResponse" does not have "notDeclaredProperty" property
 	
 $response->message = 'Bye!';
 var_dump($response);
