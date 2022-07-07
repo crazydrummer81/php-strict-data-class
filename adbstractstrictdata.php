@@ -11,7 +11,7 @@ class AbstractStrictData {
 
     foreach ($props as $propName => $propValue) {
       if (gettype($propValue) === 'NULL') {
-        throw new \InvalidArgumentException ('Property "'.$propName.'" can not be NULL in class "'.self::class.'" constructor. In might be initialized with some value.');
+        throw new \InvalidArgumentException ('Property "'.$propName.'" can not be NULL in class "'.self::class.'" constructor. It might be initialized with some value.');
       } 
     }
   }
@@ -31,7 +31,7 @@ class AbstractStrictData {
     }
 
     if (gettype($value) !== gettype($this->$property)) {
-      throw new \InvalidArgumentException('Object property "'.$property.'" must by type "'.gettype($this->$property).'", "'.gettype($value).'" given.');
+      throw new \InvalidArgumentException('Object property "'.$property.'" must be type "'.gettype($this->$property).'", "'.gettype($value).'" given.');
     }
 
     $this->$property = $value;
